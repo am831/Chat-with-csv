@@ -18,7 +18,6 @@ def create_oai_instance(api_key):
     kernel.add_chat_service("chat_service", openai_chat_completion)
     return kernel, openai_chat_completion
 
-
 async def query_ai(kernel, assistant, query: str, data: pd.DataFrame):
     data_skill = kernel.import_skill(
         DataSkill(data=data, service=assistant), skill_name="data"
