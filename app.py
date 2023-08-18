@@ -47,12 +47,11 @@ async def main():
             
             if kernel and assistant:
                 st.write("Please upload your CSV file below.")
-                data = st.file_uploader("Upload a CSV")
+                data = st.file_uploader("Upload one or more CSVs", accept_multiple_files=True)
                 query = st.text_area("Insert your query")
 
                 if st.button("Submit Query", type="primary") and data is not None:
-                    df = pd.read_csv(data)
-                    response = await query_ai(kernel=kernel, assistant=assistant, query=query, data=df)
+                    response = await query_ai(kernel=kernel, assistant=assistant, query=query, data=data)
                     st.write(response)
 
 if __name__ == "__main__":

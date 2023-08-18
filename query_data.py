@@ -18,9 +18,16 @@ def create_oai_instance(api_key):
     kernel.add_chat_service("chat_service", openai_chat_completion)
     return kernel, openai_chat_completion
 
-async def query_ai(kernel, assistant, query: str, data: pd.DataFrame):
+async def query_ai(kernel, assistant, query: str, data):
+    df = []
+    if isinstance(data, list):
+        for item in data:
+            item = pd.read_csv(item)
+            df.append(item)
+    else:
+        df = pd.read_csv(data)
     data_skill = kernel.import_skill(
-        DataSkill(data=data, service=assistant), skill_name="data"
+        DataSkill(data=df, service=assistant), skill_name="data"
     )
     query_async = data_skill["queryAsync"]
     result = await query_async.invoke_async(query)
