@@ -26,8 +26,8 @@ global_vars = {
 }
 
 assistant_creation_functions = [
-    ("Google PaLM", create_oai_instance),
-    ("Chat-GPT", create_gp_instance)
+    ("Chat-GPT", create_oai_instance),
+    ("Google PaLM", create_gp_instance)
 ]
 
 async def main():
